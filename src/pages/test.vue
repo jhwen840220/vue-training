@@ -1,6 +1,12 @@
 <template>
     <div>
-        <p>hello</p>
+        <input type="text" v-model="myIntro_inPage">
+        <br>
+        <input type="text" v-model="myIntro_inRoot">
+        <p>下方為root.js中的 state --> myValue 的值</p>
+        <p>{{myValue}}</p>
+        <button @click="changeValue('addition')">+</button>
+        <button @click="alter_changeValue('subtraction')">-</button>
     </div>
 </template>
 
@@ -11,14 +17,24 @@
 import { mapGetters, mapActions } from "vuex";
 export default {
   data() {
-    return {};
+    return {
+      myIntro_inPage: "我是放在該頁面下的data，可隨意更動我"
+    };
   },
   computed: {
     // ...為展開運算子
-    ...mapGetters({})
+    ...mapGetters({
+      myValue: "get_myValue",
+      myIntro_inRoot: "get_myIntro_inRoot"
+    })
   },
   methods: {
-    ...mapActions([])
+    ...mapActions(["changeValue"]), /////放置action在裡面
+
+    /////以下為利用dispatch叫出action
+    alter_changeValue(param) {
+      this.$store.dispatch("changeValue", param);
+    }
   }
 };
 </script>

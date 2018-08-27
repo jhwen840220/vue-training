@@ -5,6 +5,9 @@ import './assets/css/myScss.scss';
 import Vue from 'vue'
 import App from './App'
 
+// 引入 store 資料夾（上面五隻 js ）
+// 預設會去找 index.js  如果沒有的話會報錯！
+import store from "./store";
 
 // 引入 vue-router
 import VueRouter from "vue-router";
@@ -47,6 +50,7 @@ const router = new VueRouter({
 new Vue({
   el: '#app',
   router,
+  store,
   components: {
     App
   },
